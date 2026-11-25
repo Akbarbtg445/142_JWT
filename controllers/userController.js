@@ -21,7 +21,9 @@ async function register(req, res) {
       return res.status(400).json({
         message: "Email sudah terdaftar."
       });
-    } const hashedPassword = await bcrypt.hash(password, 10);
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
       email,
@@ -31,14 +33,13 @@ async function register(req, res) {
     return res.status(201).json({
       message: "Register berhasil.",
       data: {
-        id: User.id,
-        email: User.email
+        id: user.id,
+        email: user.email
       }
     });
   } catch (error) {
     return res.status(500).json({
       message: error.message
-     
     });
   }
 }
@@ -50,7 +51,9 @@ async function login(req, res) {
       return res.status(400).json({
         message: "Email dan password wajib diisi."
       });
-    } const user = await User.findOne({
+    }
+
+    const user = await User.findOne({
       where: { email }
     });
 
@@ -59,6 +62,7 @@ async function login(req, res) {
         message: "Email atau password salah."
       });
     }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -67,11 +71,11 @@ async function login(req, res) {
     }
 
     const token = jwt.sign(
-      { id: user.id, 
-        email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES }
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET || "rahasia_jwt_pws11",
+      { expiresIn: process.env.JWT_EXPIRES || "1h" }
     );
+
     return res.status(200).json({
       message: "Login berhasil.",
       token
