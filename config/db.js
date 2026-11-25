@@ -12,3 +12,4 @@ async function connectDatabase() {
     process.exit(1);
   }
 }
+module.exports = connectDatabase;
