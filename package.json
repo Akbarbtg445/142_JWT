@@ -1,0 +1,19 @@
+{
+  "name": "pws11",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akbarbtg445/142_JWT.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Akbarbtg445/142_JWT/issues"
+  },
+  "homepage": "https://github.com/Akbarbtg445/142_JWT#readme"
+}
